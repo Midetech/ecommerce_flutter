@@ -34,8 +34,10 @@ class IntroPage extends StatelessWidget {
                   color: Theme.of(context).colorScheme.inversePrimary,
                 ),
               ),
-              const Gap(10),
-              MyButton(onTap: () => Navigator.pushNamed(context, '/shop_page'), child: const Icon(Icons.arrow_forward)),
+              const Gap(25),
+              MyButton(
+                  onTap: () => Navigator.pushNamed(context, '/shop_page'),
+                  child: const Icon(Icons.arrow_forward)),
             ],
           ),
         ));
