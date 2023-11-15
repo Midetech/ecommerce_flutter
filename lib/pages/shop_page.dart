@@ -19,6 +19,7 @@ class ShopPage extends StatefulWidget {
 class _ShopPageState extends State<ShopPage> {
   late List<Product> products;
 
+  @override
   void initState() {
     super.initState();
     products = [];
@@ -99,7 +100,7 @@ class _ShopPageState extends State<ShopPage> {
                           color: Colors.red,
                           strokeAlign: BorderSide.strokeAlignInside,
                         ),
-                        const Gap(25),
+                        Gap(25),
                         Text('Loading products...')
                       ],
                     ))

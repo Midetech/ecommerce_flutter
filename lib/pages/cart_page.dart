@@ -6,7 +6,6 @@ import 'package:ecommerce_app_flutter/models/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
-import 'package:http/http.dart' as http;
 
 String publicKey = 'pk_test_1f5f152fa0b580a0dff31dbb1831575b60112d2f';
 
@@ -19,14 +18,13 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   final plugin = PaystackPlugin();
-  CheckoutMethod _method = CheckoutMethod.card;
-  int _radioValue = 0;
-  bool _inProgress = false;
+
   String? _cardNumber;
   String? _cvv;
   int? _expiryMonth;
   int? _expiryYear;
 
+  @override
   void initState() {
     super.initState();
     plugin.initialize(publicKey: publicKey);
@@ -36,7 +34,7 @@ class _CartPageState extends State<CartPage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              content: Text("Remove ${product.title!} from your cart?"),
+              content: Text("Remove ${product.title} from your cart?"),
               actions: [
                 MaterialButton(
                   onPressed: () => Navigator.pop(context),
@@ -116,7 +114,6 @@ class _CartPageState extends State<CartPage> {
   }
 
   _handleCheckout(BuildContext context) async {
-    setState(() => _inProgress = true);
     Charge charge = Charge()
       ..amount = 10000 // In base currency
       ..email = 'customer@email.com'
@@ -144,11 +141,9 @@ class _CartPageState extends State<CartPage> {
           ),
         ),
       );
-      print('Response = $response');
-      setState(() => _inProgress = false);
+      debugPrint('Response = $response');
       _updateStatus(response.reference, '$response');
     } catch (e) {
-      setState(() => _inProgress = false);
       _showMessage("Check console for error");
       rethrow;
     }
@@ -176,7 +171,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   _updateStatus(String? reference, String message) {
-    _showMessage('Reference: $reference \n\ Response: $message',
+    _showMessage('Reference: $reference \n Response: $message',
         const Duration(seconds: 7));
   }
 

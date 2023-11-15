@@ -60,13 +60,13 @@ class ProductTile extends StatelessWidget {
               ),
               const Gap(25),
               Text(
-                product.title!,
+                product.title,
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const Gap(10),
               Text(
-                product.description!,
+                product.description,
                 maxLines: 3,
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.inversePrimary),
@@ -77,7 +77,7 @@ class ProductTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('\$' + product.price.toStringAsFixed(2)),
+              Text('\$${product.price.toStringAsFixed(2)}'),
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
